@@ -73,26 +73,6 @@
             }
         }
 
-        static int ReadInt(string prompt)
-        {
-            while (true)
-            {
-                Console.Write(prompt);
-                string? input = Console.ReadLine();
-                try
-                {
-                    if (int.TryParse(input, out int value))
-                        return value;
-
-                    throw new FormatException("Invalid number format.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error: {ex.Message} Try again.");
-                }
-            }
-        }
-
         static decimal ReadDecimal(string prompt)
         {
             while (true)
@@ -119,9 +99,8 @@
             {
                 try
                 {
-                    decimal whole = ReadDecimal("Enter whole part of price: ");
-                    int cents = ReadInt("Enter cents: ");
-                    return new Money((int)whole, cents);
+                    decimal amount = ReadDecimal("Enter price in decimal format (e.g., 125.90): ");
+                    return new Money(amount);
                 }
                 catch (Exception ex)
                 {

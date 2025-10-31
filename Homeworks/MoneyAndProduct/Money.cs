@@ -34,6 +34,12 @@
             Currency = currency;
         }
 
+        public Money(decimal amount, string currency = "uah")
+        {
+            SetOrUpdateAmount(amount);
+            Currency = currency;
+        }
+
         public void SetOrUpdateAmount(decimal amount)
         {
             if (amount < 0)
@@ -53,7 +59,7 @@
             decimal newValue = ToDecimal() - value;
             if (newValue < 0)
             {
-                newValue = 0;
+                throw new InvalidOperationException("Cannot decrease by more than the current amount.");
             }
             SetOrUpdateAmount(newValue);
         }
