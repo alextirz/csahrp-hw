@@ -4,19 +4,14 @@
     {
         public int Number { get; set; }
 
-        public string ToBinary()
-        {
-            return Convert.ToString(Number, 2);
-        }
+        public DecimalNumber(int value) => Number = value;
 
-        public string ToOctal()
-        {
-            return Convert.ToString(Number, 8);
-        }
+        public string ToBinary() => Convert.ToString(Number, 2);
 
-        public string ToHex()
-        {
-            return Convert.ToString(Number, 16).ToUpper();
-        }
+        public string ToOctal() => Convert.ToString(Number, 8);
+
+        public string ToHex() => Convert.ToString(Number, 16).ToUpper();
+
+        public override string ToString() => $"Decimal: {Number}";
     }
 }
