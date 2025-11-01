@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MusicalInstruments.MusicalInstruments
+﻿namespace MusicalInstruments.MusicalInstruments
 {
     internal abstract class MusicalInstrument
     {
@@ -22,6 +16,12 @@ namespace MusicalInstruments.MusicalInstruments
         public virtual void Show() => Console.WriteLine($"Name of the instrument: {Name}");
         public virtual void Desc() => Console.WriteLine($"Description: {Description}");
         public virtual void History() => Console.WriteLine($"History: {HistoryInfo}");
+
+        public void ShowFullInfo()
+        {
+            Show();
+            Desc();
+            History();
+        }
     }
-}
 }
