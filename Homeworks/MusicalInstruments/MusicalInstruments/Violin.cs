@@ -8,5 +8,11 @@
                 "Originated in Italy, in the 16th century.")
         { 
         }
+
+        public override void Desc()
+        {
+            base.Desc();
+            Console.WriteLine("Additional info: Often used in orchestras and solo performances.");
+        }
     }
 }

@@ -8,5 +8,11 @@
                 "Originated from the Portuguesen istrument cavaquinho, brought by sailors in the 19th century.")
         {
         }
+
+        public override void Desc()
+        {
+            base.Desc();
+            Console.WriteLine("Additional info: Perfect for light, happy melodies.");
+        }
     }
 }

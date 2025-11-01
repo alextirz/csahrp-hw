@@ -8,5 +8,11 @@
             "Originated in Western Europe in the 15th century.")
         { 
         }
+
+        public override void Desc()
+        {
+            base.Desc();
+            Console.WriteLine("Additional info: Slide allows smooth glissando effects.");
+        }
     }
 }
