@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MusicalInstruments.MusicalInstruments
+﻿namespace MusicalInstruments.MusicalInstruments
 {
     internal class Trombone : MusicalInstrument
     {
-        public Trombone(string name, string description, string history) : base(name, description, history)
-        {
+        public Trombone() : base(
+            "Trombone",
+            "A brass wind instrument with a telescoping slide.",
+            "Originated in Western Europe in the 15th century.")
+        { 
         }
     }
 }

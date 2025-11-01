@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MusicalInstruments.MusicalInstruments
+﻿namespace MusicalInstruments.MusicalInstruments
 {
     internal class Ukulele : MusicalInstrument
     {
-        public Ukulele(string name, string description, string history) : base(name, description, history)
+        public Ukulele() : base(
+                "Ukulele",
+                "A small guitar-like instrument with four strings, popular in Hawaii.",
+                "Originated from the Portuguesen istrument cavaquinho, brought by sailors in the 19th century.")
         {
         }
     }

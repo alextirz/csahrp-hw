@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MusicalInstruments.MusicalInstruments
+﻿namespace MusicalInstruments.MusicalInstruments
 {
     internal class Violin : MusicalInstrument
     {
-        public Violin(string name, string description, string history) : base(name, description, history)
-        {
+        public Violin() : base(
+                "Violin",
+                "A string instrument with four strings, played with a bow.",
+                "Originated in Italy, in the 16th century.")
+        { 
         }
     }
 }
