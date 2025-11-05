@@ -1,6 +1,6 @@
-﻿namespace InterfacesTasks
+﻿namespace InterfacesTasks.Interfaces
 {
-    interface IMath
+    internal interface IMath
     {
         int Max();
         int Min();

@@ -1,4 +1,5 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using InterfacesTasks.Interfaces;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InterfacesTasks
 {
