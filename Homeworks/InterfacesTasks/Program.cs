@@ -13,6 +13,7 @@ internal class Program
             Console.WriteLine("1 - Task 1: IOutput");
             Console.WriteLine("2 - Task 2: IMath");
             Console.WriteLine("3 - Task 3: ISort");
+            Console.WriteLine("4 - Bonus: IEnumerable (foreach)");
             Console.WriteLine("0 - Exit");
             Console.Write("Choose an option: ");
 
@@ -30,6 +31,9 @@ internal class Program
                 case "3":
                     ShowTask3(myArray);
                     break;
+                case "4":
+                    ShowBonus(myArray);
+                    break;
                 case "0":
                     Console.WriteLine("Goodbye!");
                     return;
@@ -39,6 +43,7 @@ internal class Program
             }
         }
     }
+
 
     private static void ShowTask1(MyArray myArray)
     {
@@ -74,5 +79,17 @@ internal class Program
 
         myArray.SortByParam(false);
         myArray.Show("Sorted by param (false):");
+    }
+
+
+    private static void ShowBonus(MyArray myArray)
+    {
+        Console.WriteLine("Bonus: IEnumerable (foreach)");
+        Console.WriteLine("Iterating through MyArray elements:");
+
+        foreach (var item in myArray)
+        {
+            Console.WriteLine($"Element: {item}");
+        }
     }
 }

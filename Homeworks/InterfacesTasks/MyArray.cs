@@ -1,8 +1,9 @@
 ﻿using InterfacesTasks.Interfaces;
+using System.Collections;
 
 namespace InterfacesTasks
 {
-    internal class MyArray : IOutput, IMath, ISort
+    internal class MyArray : IOutput, IMath, ISort, IEnumerable<int>
     {
         private int[] numbers;
 
@@ -45,6 +46,17 @@ namespace InterfacesTasks
             numbers = isAsc
              ? numbers.OrderBy(n => n).ToArray()
              : numbers.OrderByDescending(n => n).ToArray();
+        }
+
+        public IEnumerator<int> GetEnumerator()
+        {
+            foreach (var n in numbers)
+                yield return n;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
