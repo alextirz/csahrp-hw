@@ -1,6 +1,8 @@
-﻿namespace InterfacesTasks
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace InterfacesTasks
 {
-    internal class MyArray : IOutput
+    internal class MyArray : IOutput, IMath
     {
         private int[] numbers;
 
@@ -8,6 +10,14 @@
         {
             this.numbers = numbers;
         }
+
+        public int Max() => numbers.Max();
+
+        public int Min() => numbers.Min();
+
+        public float Avg() => (float)numbers.Average();
+
+        public bool Search(int valueToSearch) => numbers.Contains(valueToSearch);
 
         public void Show()
         {
