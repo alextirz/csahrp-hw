@@ -7,19 +7,62 @@ internal class Program
         int[] data = { 5, 10, 15, 20 };
         MyArray myArray = new MyArray(data);
 
-        //Task 1 example
+        while (true)
+        {
+            Console.WriteLine("\n=== INTERFACES DEMO ===");
+            Console.WriteLine("1 - Task 1: IOutput");
+            Console.WriteLine("2 - Task 2: IMath");
+            Console.WriteLine("3 - Task 3: ISort");
+            Console.WriteLine("0 - Exit");
+            Console.Write("Choose an option: ");
+
+            string? choice = Console.ReadLine();
+            Console.WriteLine();
+
+            switch (choice)
+            {
+                case "1":
+                    ShowTask1(myArray);
+                    break;
+                case "2":
+                    ShowTask2(myArray);
+                    break;
+                case "3":
+                    ShowTask3(myArray);
+                    break;
+                case "0":
+                    Console.WriteLine("Goodbye!");
+                    return;
+                default:
+                    Console.WriteLine("Invalid option. Try again.");
+                    break;
+            }
+        }
+    }
+
+    private static void ShowTask1(MyArray myArray)
+    {
+        Console.WriteLine("Task 1: IOutput");
         myArray.Show();
         Console.WriteLine();
         myArray.Show("Here is the array with custom info:");
+    }
 
-        //Task 2 example
+    private static void ShowTask2(MyArray myArray)
+    {
+        Console.WriteLine("Task 2: IMath");
+
         Console.WriteLine($"Max: {myArray.Max()}");
         Console.WriteLine($"Min: {myArray.Min()}");
         Console.WriteLine($"Avg: {myArray.Avg()}");
         Console.WriteLine($"Search 7: {myArray.Search(7)}");    // should be false
         Console.WriteLine($"Search 7: {myArray.Search(20)}");   // should be true
+    }
 
-        //Task3 example
+    private static void ShowTask3(MyArray myArray)
+    {
+        Console.WriteLine("Task 3: ISort");
+
         myArray.SortAsc();
         myArray.Show("Sorted ascending:");
 
