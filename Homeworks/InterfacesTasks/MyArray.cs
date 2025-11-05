@@ -1,8 +1,9 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using InterfacesTasks.Interfaces;
+using System.Collections;
 
 namespace InterfacesTasks
 {
-    internal class MyArray : IOutput, IMath
+    internal class MyArray : IOutput, IMath, ISort, IEnumerable<int>
     {
         private int[] numbers;
 
@@ -28,6 +29,34 @@ namespace InterfacesTasks
         {
             Console.WriteLine(info);
             Console.WriteLine("Array elements: " + string.Join(", ", numbers));
+        }
+
+        public void SortAsc()
+        {
+            numbers = numbers.OrderBy(n => n).ToArray();
+        }
+
+        public void SortDesc()
+        {
+            numbers = numbers.OrderByDescending(n => n).ToArray();
+        }
+
+        public void SortByParam(bool isAsc)
+        {
+            numbers = isAsc
+             ? numbers.OrderBy(n => n).ToArray()
+             : numbers.OrderByDescending(n => n).ToArray();
+        }
+
+        public IEnumerator<int> GetEnumerator()
+        {
+            foreach (var n in numbers)
+                yield return n;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
