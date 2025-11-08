@@ -56,5 +56,15 @@
         {
             Console.WriteLine($"Name: {Name}, Salary: {Salary}");
         }
+        public override bool Equals(object obj)
+        {
+            return obj is Employee c && salary == c.salary;
+        }
+
+        public override int GetHashCode()
+        {
+            return salary.GetHashCode();
+        }
+
     }
 }

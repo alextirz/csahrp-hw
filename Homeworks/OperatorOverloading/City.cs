@@ -56,7 +56,9 @@
         public override bool Equals(object obj)
         {
             if (obj is City other)
+            {
                 return Population == other.Population;
+            }
             return false;
         }
 
