@@ -131,5 +131,24 @@
                 Console.WriteLine();
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Matrix other)
+            {
+                return this == other;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 31;
+            foreach (var value in data)
+            {
+                hash ^= value.GetHashCode();
+            }
+            return hash;
+        }
     }
 }
