@@ -74,7 +74,30 @@
             return result;
         }
 
-        // ToDo *
+        public static Matrix operator *(Matrix m1, Matrix m2)
+        {
+            if (m1.Columns != m2.Rows)
+                throw new InvalidOperationException("Number of columns of first matrix must be equal to the number of rows in the second matrix.");
+
+            var result = new Matrix(m1.Rows, m2.Columns);
+
+            for (int i = 0; i < m1.Rows; i++)
+            {
+                for (int j = 0; j < m2.Columns; j++)
+                {
+                    result[i, j] = 0;
+                    for (int k = 0; k < m1.Columns; k++)
+                    {
+                        //i is the current row of the matrix1; 
+                        //j is the current column of the matrix 2;
+                        //k is the column of the martix1 we need to iterate, which is the same as the row of the martix2;
+                        result[i, j] += m1[i, k] * m2[k, j]; 
+                    }
+                }
+            }
+
+            return result;
+        }
 
         public static bool operator ==(Matrix m1, Matrix m2)
         {
