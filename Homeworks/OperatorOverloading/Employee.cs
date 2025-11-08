@@ -27,11 +27,10 @@
         {
             return new Employee(e.Name, e.Salary + amount);
         }
-        public static Employee operator -(Employee e, double amount)
+
+        public static Employee operator -(Employee e, int number)
         {
-            double newSalary = e.Salary - amount;
-            if (newSalary < 0) newSalary = 0;
-            return new Employee(e.Name, newSalary);
+            return new Employee(e.Name, e.Salary - number);
         }
 
         public static bool operator ==(Employee e1, Employee e2) 
