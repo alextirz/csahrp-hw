@@ -117,6 +117,19 @@
             return true;
         }
 
-        public static bool operator !=(Matrix m1, Matrix m2) => !(m1 == m2);
+        public static bool operator !=(Matrix m1, Matrix m2)
+        {
+            return !(m1 == m2);
+        }
+
+        public void Show()
+        {
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                    Console.Write($"{data[i, j]} ");
+                Console.WriteLine();
+            }
+        }
     }
 }

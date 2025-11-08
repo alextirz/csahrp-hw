@@ -1,4 +1,5 @@
 ﻿
+
 namespace OperatorOverloading
 {
     class Program
@@ -11,6 +12,7 @@ namespace OperatorOverloading
             Console.WriteLine("1 - Employee demo");
             Console.WriteLine("2 - City demo");
             Console.WriteLine("3 - CreditCard demo");
+            Console.WriteLine("4 - Matrix demo");
             Console.Write("Enter choice: ");
             string choice = Console.ReadLine();
 
@@ -25,11 +27,15 @@ namespace OperatorOverloading
                 case "3":
                     RunCreditCardDemo();
                     break;
+                case "4":
+                    RunMatrixDemo();
+                    break;
                 default:
                     Console.WriteLine("Invalid choice.");
                     break;
             }
         }
+
         static void RunEmployeeDemo()
         {
             Console.WriteLine("\nEmployee demo.\n");
@@ -111,6 +117,39 @@ namespace OperatorOverloading
             Console.WriteLine($"card1 != card2: {card1 != card2}");
             Console.WriteLine($"card1 > card2: {card1 > card2}");
             Console.WriteLine($"card1 < card2: {card1 < card2}");
+        }
+
+        private static void RunMatrixDemo()
+        {
+
+            Console.WriteLine("\nMatrix demo\n");
+
+            double[,] aData = { { 1, 2 }, { 3, 4 } };
+            double[,] bData = { { 5, 6 }, { 7, 8 } };
+
+            Matrix A = new Matrix(aData);
+            Matrix B = new Matrix(bData);
+
+            Console.WriteLine("Matrix A:");
+            A.Show();
+
+            Console.WriteLine("\nMatrix B:");
+            B.Show();
+
+            Console.WriteLine("\nA + B:");
+            var C = A + B;
+            C.Show();
+
+            Console.WriteLine("\nA - B:");
+            C = A - B;
+            C.Show();
+
+            Console.WriteLine("\nA * B:");
+            C = A * B;
+            C.Show();
+
+            Console.WriteLine($"\nA == B: {A == B}");
+            Console.WriteLine($"A != B: {A != B}");
         }
     }
 }
