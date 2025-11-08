@@ -1,12 +1,16 @@
-﻿namespace OperatorOverloading
+﻿
+namespace OperatorOverloading
 {
     class Program
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             Console.WriteLine("Choose demo:");
             Console.WriteLine("1 - Employee demo");
             Console.WriteLine("2 - City demo");
+            Console.WriteLine("3 - CreditCard demo");
             Console.Write("Enter choice: ");
             string choice = Console.ReadLine();
 
@@ -17,6 +21,9 @@
                     break;
                 case "2":
                     RunCityDemo();
+                    break;
+                case "3":
+                    RunCreditCardDemo();
                     break;
                 default:
                     Console.WriteLine("Invalid choice.");
@@ -80,6 +87,30 @@
             Console.WriteLine($"city1 < city2: {city1 < city2}");
             Console.WriteLine($"city1 == city2: {city1 == city2}");
             Console.WriteLine($"city1 != city2: {city1 != city2}");
+        }
+
+        static void RunCreditCardDemo()
+        {
+            Console.WriteLine("\nCreditCard demo\n");
+
+            CreditCard card1 = new CreditCard("1111-2222-3333-4444", 123, 1000m);
+            CreditCard card2 = new CreditCard("5555-6666-7777-8888", 456, 1500m);
+
+            card1.ShowInfo();
+            card2.ShowInfo();
+
+            Console.WriteLine("\nAdding money to card1 and subtracting from card2:");
+            card1 += 500m;   // now 1500
+            card2 -= 200m;   // now 1300
+
+            card1.ShowInfo();
+            card2.ShowInfo();
+
+            Console.WriteLine("\nComparing cards by CVC and Balance:");
+            Console.WriteLine($"card1 == card2: {card1 == card2}");
+            Console.WriteLine($"card1 != card2: {card1 != card2}");
+            Console.WriteLine($"card1 > card2: {card1 > card2}");
+            Console.WriteLine($"card1 < card2: {card1 < card2}");
         }
     }
 }
