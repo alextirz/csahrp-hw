@@ -1,4 +1,4 @@
-﻿namespace GarbageCollector
+﻿namespace GarbageCollector.Classes
 {
     internal class Play
     {

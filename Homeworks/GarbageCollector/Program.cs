@@ -1,4 +1,6 @@
-﻿namespace GarbageCollector
+﻿using GarbageCollector.Classes;
+
+namespace GarbageCollector
 {
     internal class Program
     {
