@@ -7,24 +7,29 @@ namespace GarbageCollector
     {
         static void Main(string[] args)
         {
-            //TestPlay("Lisova Pisnia", "Lesya Ukrainka", "Fantasy drama", 1911);
-            //GC.Collect();
-            //GC.WaitForPendingFinalizers();
+            TestPlay("Lisova Pisnia", "Lesya Ukrainka", "Fantasy drama", 1911);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
 
-            //Console.WriteLine();
-            //Console.WriteLine("NEXT");
-            //TestPlay("Konotopska Vidma", "Hryhorii Kvitka-Osnovianenko", "Satirical novella/drama", 1833);
-            //GC.Collect();
-            //GC.WaitForPendingFinalizers();
+            Console.WriteLine();
+            Console.WriteLine("NEXT");
+            TestPlay("Konotopska Vidma", "Hryhorii Kvitka-Osnovianenko", "Satirical novella/drama", 1833, true);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
 
-            //Console.WriteLine();
-            //Console.WriteLine("ZANAVES.");
+            Console.WriteLine("ZANAVES.");
 
+            Console.WriteLine();
+            Console.WriteLine("SHOPS");
             TestShop("Silpo", "Kyiv, Khreshchatyk 10", ShopType.Grocery);
-            TestShop("Skechers", "Kyiv, Ocean Plaza", ShopType.Footwear);
+
+            Console.WriteLine();
+            TestShop("Skechers", "Kyiv, Ocean Plaza", ShopType.Footwear, true);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
-        private static void TestPlay(string title, string author, string genre, int year)
+        private static void TestPlay(string title, string author, string genre, int year, bool forceDispose = false)
         {
             var play = new Play(title, author, genre, year);
 
@@ -32,16 +37,20 @@ namespace GarbageCollector
             Console.WriteLine(play.ShowFullInfo());
 
             play.Perform();
+
+            if (forceDispose)
+                play.Dispose();
         }
 
-        private static void TestShop(string name, string address, ShopType type)
+        private static void TestShop(string name, string address, ShopType type, bool forceDispose = false)
         {
             var shop = new Shop(name, address, type);
             shop.ShowInfo();
             shop.Open();
             shop.SellItem("Bread", 5);
-            shop.Dispose();
-            Console.WriteLine();
+          
+            if (forceDispose)
+                shop.Dispose();
         }
     }
 }

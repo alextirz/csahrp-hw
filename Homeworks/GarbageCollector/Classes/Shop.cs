@@ -2,6 +2,7 @@
 {
     internal class Shop : IDisposable
     {
+        private bool disposed = false;
         public string Name { get; set; }
         public string Address { get; set; }
         public ShopType Type { get; set; }
@@ -12,12 +13,6 @@
             Name = name;
             Address = address;
             Type = type;
-        }
-
-        public void Dispose()
-        {
-            IsOpen = false;
-            Console.WriteLine($"Shop {Name} is disposed");
         }
 
         public void ShowInfo()
@@ -37,9 +32,7 @@
                 Console.WriteLine($"The shop '{Name}' is now OPEN! 🛒");
             }
             else
-            {
                 Console.WriteLine($"The shop '{Name}' is already open.");
-            }
         }
 
         public void Close()
@@ -50,21 +43,38 @@
                 Console.WriteLine($"The shop '{Name}' is now CLOSED. 🔒");
             }
             else
-            {
                 Console.WriteLine($"The shop '{Name}' is already closed.");
-            }
         }
 
         public void SellItem(string item, int quantity)
         {
             if (IsOpen)
-            {
                 Console.WriteLine($"Sold {quantity} x {item} at '{Name}'!");
-            }
             else
-            {
                 Console.WriteLine($"Cannot sell items. The shop '{Name}' is closed.");
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed) return;
+            if (disposing)
+            {
+                IsOpen = false;
+                Console.WriteLine($"Disposing the shop '{Name}'");
             }
+            disposed = true;
+        }
+
+        ~Shop()
+        {
+            Console.WriteLine($"Distructor is called for {Name}"); //to test the case when dispose is not called explicitly
+            Dispose(false);
         }
     }
 }
