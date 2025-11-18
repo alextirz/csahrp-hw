@@ -29,7 +29,7 @@
             Console.WriteLine($"Status: {(IsOpen ? "Open" : "Closed")}");
         }
 
-        public void OpenTheShop()
+        public void Open()
         {
             if (!IsOpen)
             {
