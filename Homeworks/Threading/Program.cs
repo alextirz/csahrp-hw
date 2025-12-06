@@ -1,10 +1,10 @@
 ﻿class Program
 {
+    static int freeChairs = 2; // Number of free seats in the waiting room
+    static int numberOfcustomers = 6;
     static Semaphore customers = new Semaphore(0, int.MaxValue);  // How many clients are waiting
     static Semaphore barberReady = new Semaphore(0, int.MaxValue); // Barber is ready
     static Semaphore _freeChairs = new Semaphore(1, 1); // Sync for free chairs
-    static int freeChairs = 2; // Number of free seats in the waiting room
-    static int numberOfcustomers = 6;
 
     static void Main()
     {
@@ -25,12 +25,15 @@
         {
             Console.WriteLine("Barber is waiting for the client.");
             customers.WaitOne(); // Sleep until a client arrives
+
             _freeChairs.WaitOne();
             freeChairs++;        
             _freeChairs.Release();
-            Console.WriteLine("Barber is working");
-            Thread.Sleep(500);
+
             barberReady.Release();
+            Console.WriteLine("Come in, next client!"); 
+            Console.WriteLine("Barber is working"); 
+            Thread.Sleep(500);
             Console.WriteLine("Barber is done and ready for the next.");
             Console.WriteLine();
         }
