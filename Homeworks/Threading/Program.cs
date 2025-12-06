@@ -1,21 +1,23 @@
 ﻿class Program
 {
     static int freeChairs = 2; // Number of free seats in the waiting room
-    static int numberOfcustomers = 6;
+    static int numberOfcustomers = 10;
     static Semaphore customers = new Semaphore(0, int.MaxValue);  // How many clients are waiting
     static Semaphore barberReady = new Semaphore(0, int.MaxValue); // Barber is ready
     static Semaphore chairsLock = new Semaphore(1, 1); // Sync for free chairs
+    static int customerTimeInterval = 100;
+    static int haircutTimeInterval = 500;
 
     static void Main()
     {
         Thread barber = new Thread(BarberWork);
         barber.Start();
 
-        for (int i = 1; i <= numberOfcustomers; i++)
+        for (int i = 0; i <= numberOfcustomers; i++)
         {
             Thread customer = new Thread(CustomerArrives);
             customer.Start(i);
-            Thread.Sleep(100);
+            Thread.Sleep(customerTimeInterval * i);
         }
     }
 
@@ -23,8 +25,16 @@
     {
         while (true)
         {
-            Console.WriteLine("Barber is waiting for the client.");
-            customers.WaitOne(); // Sleep until a client arrives
+            if (!customers.WaitOne(0))
+            {
+                Console.WriteLine("Barber is sleeping (no customers).");
+                customers.WaitOne(); 
+                Console.WriteLine("Barber woke up!");
+            }
+            else
+            {
+                Console.WriteLine("Barber immediately takes next client (no sleep).");
+            }
 
             chairsLock.WaitOne();
             freeChairs++;        
@@ -32,7 +42,7 @@
 
             barberReady.Release(); // Invite the next client
             Console.WriteLine("Barber is cutting hair...");
-            Thread.Sleep(500);
+            Thread.Sleep(haircutTimeInterval);
             Console.WriteLine("Barber finished.\n");
         }
     }
