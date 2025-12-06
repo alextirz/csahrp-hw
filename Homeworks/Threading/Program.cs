@@ -4,7 +4,7 @@
     static int numberOfcustomers = 6;
     static Semaphore customers = new Semaphore(0, int.MaxValue);  // How many clients are waiting
     static Semaphore barberReady = new Semaphore(0, int.MaxValue); // Barber is ready
-    static Semaphore _freeChairs = new Semaphore(1, 1); // Sync for free chairs
+    static Semaphore chairsLock = new Semaphore(1, 1); // Sync for free chairs
 
     static void Main()
     {
@@ -26,30 +26,28 @@
             Console.WriteLine("Barber is waiting for the client.");
             customers.WaitOne(); // Sleep until a client arrives
 
-            _freeChairs.WaitOne();
+            chairsLock.WaitOne();
             freeChairs++;        
-            _freeChairs.Release();
+            chairsLock.Release();
 
-            barberReady.Release();
-            Console.WriteLine("Come in, next client!"); 
-            Console.WriteLine("Barber is working"); 
+            barberReady.Release(); // Invite the next client
+            Console.WriteLine("Barber is cutting hair...");
             Thread.Sleep(500);
-            Console.WriteLine("Barber is done and ready for the next.");
-            Console.WriteLine();
+            Console.WriteLine("Barber finished.\n");
         }
     }
 
     static void CustomerArrives(object id)
     {
         Console.WriteLine($"Client {id} is trying to enter.");
-        _freeChairs.WaitOne();
+        chairsLock.WaitOne();
         if (freeChairs > 0)
         {
             freeChairs--;
              Console.WriteLine($"Client {id} is waiting in the chair. Free chairs left: {freeChairs}");
-            _freeChairs.Release();
+            chairsLock.Release();
+
             customers.Release(); // Notify the barber
-            Console.WriteLine($"Client {id} Notified the barber he is here!");
             barberReady.WaitOne(); // Wait until the barber invites
 
             Console.WriteLine($"Client {id} leaves WITH haircut.");
@@ -57,7 +55,7 @@
         else
         {
             Console.WriteLine($"Client {id} leaves WITHOUT haircut.");
-            _freeChairs.Release();
+            chairsLock.Release();
         }
     }
 }
